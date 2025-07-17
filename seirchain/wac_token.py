@@ -64,3 +64,21 @@ class WACToken:
         self.total_supply += inflation
         # In a real implementation, the newly created tokens would be distributed
         # to stakers and validators.
+
+    def quadratic_vote(self, user, votes):
+        """
+        Casts a vote using quadratic voting.
+
+        Args:
+            user: The user who is voting.
+            votes: The number of votes to cast.
+
+        Returns:
+            The cost of the votes.
+        """
+        if self.balances.get(user, 0) < votes ** 2:
+            raise ValueError("Insufficient funds for quadratic voting.")
+
+        cost = votes ** 2
+        self.balances[user] -= cost
+        return cost
