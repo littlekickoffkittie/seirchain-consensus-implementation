@@ -1,6 +1,6 @@
 import unittest
 import time
-from wac_token import WACToken
+from seirchain.wac_token import WACToken
 
 class TestWACToken(unittest.TestCase):
 
