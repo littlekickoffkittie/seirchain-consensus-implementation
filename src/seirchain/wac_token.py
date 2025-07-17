@@ -82,3 +82,13 @@ class WACToken:
         cost = votes ** 2
         self.balances[user] -= cost
         return cost
+
+    def burn(self, address, amount):
+        """
+        Burns a specified amount of WAC tokens from an address.
+        """
+        if self.balances.get(address, 0) < amount:
+            raise ValueError("Insufficient funds to burn.")
+
+        self.balances[address] -= amount
+        self.total_supply -= amount
